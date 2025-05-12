@@ -5,4 +5,4 @@ function extractAndReverse(arr) {
     return rev_arr
 }
 
-console.log(extractAndReverse(array))
+console.log(extractAndReverse(array))``
