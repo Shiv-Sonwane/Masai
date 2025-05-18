@@ -4,7 +4,7 @@ let arr = [
 ];
 
 function processProducts(arr) {
-    // This maps just the names if you need them
+    
     let narr = arr.map(ele => ele.name);
 
     arr.forEach(element => {
