@@ -1,4 +1,4 @@
-// Step 1
+
 function Car(make, model, year, type, isAvailabe = true) {
     this.make = make
     this.model = model
@@ -7,29 +7,29 @@ function Car(make, model, year, type, isAvailabe = true) {
     this.isAvailabe = isAvailabe
 }
 
-// Step 2
-function Customer(name, renedCars = []) {
+
+function Customer(name, rentedCars = []) {
     this.name = name
-    this.rendedCars = renedCars
+    this.rentedCars = rentedCars
 }
 
-// Step 3
+
 Customer.prototype.rentCar = function (car) {
     if (car.isAvailabe) {
         car.isAvailabe = false
-        this.rendedCars.push(car)
+        this.rentedCars.push(car)
         console.log(`${this.name} rented a ${car.make} ${car.model}`);
     } else {
         console.log(`${car.make} ${car.model} is already rented.`);
     }
 }
 
-// Step 6
+
 
 Customer.prototype.returnCar = function (car) {
-    let index = this.rendedCars.indexOf(car)
+    let index = this.rentedCars.indexOf(car)
     if (index > -1) {
-        this.rendedCars.splice(index, 1)
+        this.rentedCars.splice(index, 1)
         console.log(`${this.name} is returning ${car.make} ${car.model}...`)
     }
     setTimeout(() => {
@@ -38,16 +38,15 @@ Customer.prototype.returnCar = function (car) {
     }, 2000);
 }
 
-// Step 4
-function PremiumCustomer(name, renedCars = [], discountedRate) {
+
+function PremiumCustomer(name, rentedCars = [], discountedRate) {
     Customer.call(this, name)
     this.discountedRate = discountedRate
 }
-// Inherit prototype methods
+
 PremiumCustomer.prototype = Object.create(Customer.prototype);
 PremiumCustomer.prototype.constructor = PremiumCustomer;
 
-// Step 5
 function calculateRentalPrice(days, car, isPremium, discountRate) {
     const baseRate = 50
     let typeMultiplier = 1
@@ -63,7 +62,7 @@ function calculateRentalPrice(days, car, isPremium, discountRate) {
     return price
 }
 
-// Step 7
+
 
 function scheduleMaintenance(car, delay) {
     console.log(`Maintenance started for ${car.make} ${car.model}...`);
@@ -74,27 +73,24 @@ function scheduleMaintenance(car, delay) {
     }, delay);
 }
 
-
-// Step 8 - Demonstration
-// Create Cars
 const car1 = new Car("Toyota", "Corolla", 2020, "Sedan");
 const car2 = new Car("Honda", "CR-V", 2022, "SUV");
 const car3 = new Car("Ford", "Fusion", 2021, "Sedan");
 
-// Create Customers
-const alice = new Customer("Alice");
-const bob = new PremiumCustomer("Bob", 0.2); // 20% discount
 
-// Regular rent
+const alice = new Customer("Alice");
+const bob = new PremiumCustomer("Bob", 0.2);
+
+
 alice.rentCar(car1);
 console.log("Rental price (Alice): $" + calculateRentalPrice(3, car1, false));
 
-// Premium rent with bind
-const boundRent = alice.rentCar.bind(bob); // Using bind
+
+const boundRent = alice.rentCar.bind(bob); 
 boundRent(car2);
 console.log("Rental price (Bob): $" + calculateRentalPrice(5, car2, true, bob.discountRate));
 
-// Return cars
+
 setTimeout(() => {
     bob.returnCar(car2);
 }, 4000);
