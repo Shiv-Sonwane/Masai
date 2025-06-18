@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        #container {
+            max-width:300px;
+            margin: auto;
+            background-color: rgb(255, 255, 255);
+            display: grid;
+            height: 50vh;
+            gap: 10px;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        .res {
+            grid-column: auto/ span 4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .black {
+            background-color: black;
+            color: white;
+        }
+
+        button {
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: none;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .red {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <button class="res"></button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="black">+</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="black">-</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="black">X</button>
+        <button class="red">C</button>
+        <button>0</button>
+        <button class="black">=</button>
+        <button class="black">/</button>
+    </div>
+</body>
+
+</html>

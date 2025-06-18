@@ -1,0 +1,35 @@
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 10px;
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+  }
+}
