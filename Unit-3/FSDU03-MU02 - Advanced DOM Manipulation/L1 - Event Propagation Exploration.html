@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .box {
+      padding: 30px;
+      margin: 10px;
+      border: 2px solid black;
+    }
+    #outer {
+      background-color: #d1e7dd;
+    }
+    #middle {
+      background-color: #fff3cd;
+    }
+    #inner {
+      background-color: #f8d7da;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="outer" class="box">
+    Outer Div
+    <button id="btn-outer">Outer Button</button>
+    <div id="middle" class="box">
+      Middle Div
+      <button id="btn-middle">Middle Button</button>
+      <div id="inner" class="box">
+        Inner Div
+        <button id="btn-inner">Inner Button</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function addEventHandlers(element, name) {
+      element.addEventListener('click', function(e) {
+        alert(`${name} clicked (BUBBLING)`);
+      }, false); 
+
+      element.addEventListener('click', function(e) {
+        alert(`${name} clicked (CAPTURING)`);
+      }, true); 
+    }
+
+
+    addEventHandlers(document.getElementById('outer'), 'Outer Div');
+    addEventHandlers(document.getElementById('middle'), 'Middle Div');
+    addEventHandlers(document.getElementById('inner'), 'Inner Div');
+
+    addEventHandlers(document.getElementById('btn-outer'), 'Outer Button');
+    addEventHandlers(document.getElementById('btn-middle'), 'Middle Button');
+
+
+    const innerBtn = document.getElementById('btn-inner');
+    innerBtn.addEventListener('click', function(e) {
+      alert('Inner Button clicked (BUBBLING)');
+      e.stopPropagation(); 
+    }, false);
+
+    innerBtn.addEventListener('click', function(e) {
+      alert('Inner Button clicked (CAPTURING)');
+      e.stopPropagation(); 
+    }, true);
+  </script>
+
+</body>
+</html>
