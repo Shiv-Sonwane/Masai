@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Theme Selector</title>
+</head>
+<body>
+
+  <h2>Theme Selector</h2>
+
+  <!-- Dropdown to select theme -->
+  <label for="themeSelector">Choose a theme:</label>
+  <select id="themeSelector" onchange="applyTheme(this.value)">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+    <option value="blue">Blue</option>
+  </select>
+
+  <p>This is a sample paragraph to show theme effects.</p>
+
+  <script>
+    // Function to apply theme styles
+    function applyTheme(theme) {
+      let bgColor = '';
+      let textColor = '';
+
+      // Set background and text color based on theme
+      switch (theme) {
+        case 'dark':
+          bgColor = '#222';
+          textColor = '#fff';
+          break;
+        case 'blue':
+          bgColor = '#cce0ff';
+          textColor = '#003366';
+          break;
+        case 'light':
+        default:
+          bgColor = '#ffffff';
+          textColor = '#000000';
+          break;
+      }
+
+      // Apply styles to body
+      document.body.style.backgroundColor = bgColor;
+      document.body.style.color = textColor;
+
+      // Save the selected theme in sessionStorage
+      sessionStorage.setItem('selectedTheme', theme);
+    }
+
+    // On page load, check if theme is stored in sessionStorage
+    let savedTheme = sessionStorage.getItem('selectedTheme') || 'light';
+    document.getElementById('themeSelector').value = savedTheme;
+    applyTheme(savedTheme);
+  </script>
+
+</body>
+</html>

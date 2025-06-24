@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preferences Form</title>
+</head>
+<body>
+
+  <form id="preferencesForm">
+    <label for="theme">Theme:</label>
+    <select id="theme">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+
+    <label for="language">Language:</label>
+    <select id="language">
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+    </select>
+
+    <label for="notifications">Notifications:</label>
+    <input type="checkbox" id="notifications">
+
+    <button type="submit">Save Preferences</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('preferencesForm');
+    const themeSelect = document.getElementById('theme');
+    const languageSelect = document.getElementById('language');
+    const notificationsCheckbox = document.getElementById('notifications');
+
+    // Function to apply the selected theme to the page
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.body.style.backgroundColor = "#1e1e1e";
+        document.body.style.color = "#ffffff";
+      } else {
+        document.body.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#000000";
+      }
+    }
+
+    // Save preferences on form submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const preferences = {
+        theme: themeSelect.value,
+        language: languageSelect.value,
+        notifications: notificationsCheckbox.checked
+      };
+
+      localStorage.setItem('preferences', JSON.stringify(preferences));
+
+      // Apply theme immediately after saving
+      applyTheme(preferences.theme);
+
+      alert('Preferences Saved!');
+    });
+
+    // Load preferences on page load
+    window.onload = () => {
+      const savedPreferences = localStorage.getItem('preferences');
+      if (savedPreferences) {
+        const preferences = JSON.parse(savedPreferences);
+
+        //Fix: Use different variable names than the element references
+        themeSelect.value = preferences.theme;
+        languageSelect.value = preferences.language;
+        notificationsCheckbox.checked = preferences.notifications;
+
+        //Apply theme on page load
+        applyTheme(preferences.theme);
+      }
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+
+  <h2>Notes App</h2>
+
+  <!-- Text area to enter notes -->
+  <textarea id="noteArea"  placeholder="Type your notes here..."></textarea><br><br>
+
+  <!-- Action buttons -->
+  <button onclick="saveNotes()">Save Notes</button>
+  <button onclick="loadNotes()">Load Notes</button>
+  <button onclick="clearNotes()">Clear Notes</button>
+
+  <script>
+    let noteArea = document.getElementById('noteArea');
+    
+
+    // Load notes automatically on page load
+    loadNotes();
+
+    // Function to save notes to localStorage
+    function saveNotes() {
+      let notes = noteArea.value.trim();
+      if (notes === "") {
+        alert("Cannot save empty notes.");
+        return;
+      }
+      localStorage.setItem('userNotes', notes);
+      alert("Notes saved successfully!");
+    }
+
+    // Function to load notes from localStorage
+    function loadNotes() {
+      const savedNotes = localStorage.getItem('userNotes');
+      if (savedNotes) {
+        noteArea.value = savedNotes;
+      } else {
+        noteArea.value = "";
+      }
+    }
+
+    // Function to clear notes from localStorage
+    function clearNotes() {
+      localStorage.removeItem('userNotes');
+      noteArea.value = "";
+      alert("Notes cleared.");
+    }
+  </script>
+
+</body>
+</html>
