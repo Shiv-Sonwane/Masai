@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin: 2%;
+        }
+        .iten{
+
+        }
+        .toast{
+
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Quick Cart</h2>
+
+    <form id="items">
+        <input type="text" id="name" placeholder="Item Name" required>
+        <input type="number" id="qty" min="1" value="1" required>
+        <input type="number" id="price" min="0" value="0" required>
+
+        <select id="category">
+            <option value="All">All</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Snacks">Snacks</option>
+            <option value="Daily essential"></option>
+        </select>
+        <button>Add</button>
+    </form>
+
+    <div>
+        <p>Total items : <span id="totalitems">0</span></p>
+        <p>Total Cost :</p> <span id="totalcost">0</span></p>
+        <div>
+            Filter:
+            <button onclick="setFilter('All')"></button>
+            <button onclick="setFilter('Dairy')"></button>
+            <button onclick="setFilter('Snacks')"></button>
+            <button onclick="setFilter('Daily essential')"></button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="'items"></div>
+
+    <div class="to" id="undo">Item deleted. <button onclick="undoDelete()">Undo</button></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
