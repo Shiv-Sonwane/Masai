@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg, #fff);
+  color: var(--text, #000);
+}
+
+header, nav {
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+nav button {
+  margin: 0 0.5rem;
+}
+
+.view {
+  display: none;
+  padding: 1rem;
+}
+
+.view.active {
+  display: block;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  width: 200px;
+}
+
+.card img {
+  max-width: 100%;
+}
+
+input, select, button {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+.dark {
+  --bg: #111;
+  --text: #eee;
+  background-color: var(--bg);
+  color: var(--text);
+}

@@ -53,7 +53,7 @@
   async function fetchMovies(query) {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=43393ee8&s=${query}`
+        `https://www.omdbapi.com/?i=tt3896198&apikey=43393ee8&s=${query}`
       );
       const data = await response.json();
       if (data.Response == "True") {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button id="toggle-theme">Toggle theme</button>
+        </button>
+    </header>
+    <nav>
+        <button id="dashboard-tab">Dashboard</button>
+        <button id="Firebase-tab">Firebase</button>
+        <button id="add-product-tab">Add\Product</button>
+    </na>
+    <main>
+        <section id="dashboard-view" class="view active"> 
+          <input type="text" id="search-input" placeholder="Search products..."/>
+          <select  id="sort-select" >
+            <Option value="">Sort by</Option>
+            <option value="Price"></option>
+            <option value="Name">name</option>
+          </select>
+          <div id="product-list" class="card-container"></div>
+          <div id=""pagination></div>
+        </section>
+        <section id="firebase-view" class="view">
+            <h2>Firebase Products</h2>
+            <div id="firebase-product-list"></div>
+        </section id="add-product-view" class="view";>
+        
+        <section id="add-product-view" class="view">
+          <h2>Add New Product</h2>
+          <form id="add-product-form">
+            <input type="text" id="title" placeholder="Title" required />
+            <input type="text" id="description" placeholder="Description" required />
+            <input type="number" id="price" placeholder="Price" required />
+            <input type="text" id="thumbnail" placeholder="Thumbnail URL" required />
+            <button type="submit">Add Product</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="firebase.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
