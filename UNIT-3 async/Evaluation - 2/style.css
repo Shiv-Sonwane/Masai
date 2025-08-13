@@ -13,6 +13,7 @@ body {
 }
 header > h1 {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 form {
@@ -34,7 +35,6 @@ textarea {
   font-size: 16px;
   border:2px solid #cfcbcb;
   border-radius: 6px;
-  resize: vertical;
 }
 
 button {
