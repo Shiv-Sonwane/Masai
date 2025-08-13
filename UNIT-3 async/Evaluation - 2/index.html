@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeKeep</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>CodeKeep</h1>
+    </header>
+    <main>
+      <form id="snippet-form">
+        <input
+          type="text"
+          id="title"
+          placeholder="Enter Snippet Title..."
+          required
+        />
+        <input
+          type="text"
+          id="language"
+          placeholder="Enter the Programming Language"
+          required
+        />
+        <textarea id="code" placeholder="Enter your Code Snippet..."></textarea>
+        <button type="submit" id="save-btn">Save Snippet</button>
+      </form>
+
+      <div id="Sync-message" style="display: none">Syncing...</div>
+
+      <ul id="snippet-list"></ul>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
