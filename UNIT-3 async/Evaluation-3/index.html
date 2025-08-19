@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlavorFind</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>FlavorFind</h1>
+        <button id="themeToggle">Dark Mode</button>
+    </header>
+    
+    <section id="authSection">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button id="login-btn">Login</button>
+        <button id="signup-btn">SignUp</button>
+        <p id="login-message"></p>
+    </section>
+
+    <section id="searchSection" class="hidden">
+        <h2>Search Recipes</h2>
+        <input type="text" id="searchInput" placeholder="Search for Recipes...">
+        <div id="results"></div>
+    </section>
+
+    <section id="recipeBoxSection" class="hidden">
+        <h2>My Recipe Box</h2>
+        <div class="filters">
+            <button data-filters="All">All</button>
+            <button data-filters="To Try">To Try</button>
+            <button data-filters="Made">Made</button>
+        </div>
+        <div id="recipeBox"></div>
+        <button id="logout-btn">LogOut</button>
+    </section>
+
+    <script type="module" src="config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>
