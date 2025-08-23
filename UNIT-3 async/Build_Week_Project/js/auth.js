@@ -1,47 +1,67 @@
-import { auth } from "./config.js";
+import { auth, db } from "./config.js";
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut 
-} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// Signup Logic (signup.html)
-const signupBtn = document.getElementById("signupBtn");
-if (signupBtn) {
-  signupBtn.addEventListener("click", async () => {
-    const email = document.getElementById("signupEmail").value;
-    const password = document.getElementById("signupPassword").value;
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("Account created successfully! Please login.");
-      window.location.href = "index.html"; // redirect to login page
-    } catch (error) {
-      alert(error.message);
-    }
-  });
-}
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // --- Signup Logic ---
+  const signupBtn = document.getElementById("signupBtn");
+  if (signupBtn) {
+    signupBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("signup-email")?.value.trim();
+      const password = document.getElementById("signup-password")?.value.trim();
 
-// Login Logic (index.html)
-const loginBtn = document.getElementById("loginBtn");
-if (loginBtn) {
-  loginBtn.addEventListener("click", async () => {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
+      if (!email || !password) {
+        alert("Please enter email and password");
+        return;
+      }
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful!");
-      // redirect to homepage/dashboard (create later)
-      window.location.href = "index.html";
-    } catch (error) {
-      alert(error.message);
-    }
-  });
-}
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-// Logout Logic (future use in home.html)
+        await setDoc(doc(db, "users", userCredential.user.uid), { email });
+        alert("Account created successfully! Please login.");
+        window.location.href = "/UNIT-3 async/Build_Week_Project/html/index.html"; // redirect to login
+      } catch (error) {
+        console.error("Signup error:", error);
+        alert("Signup failed: " + error.message);
+      }
+    });
+  }
+
+  // --- Login Logic ---
+  const loginBtn = document.getElementById("loginBtn");
+  if (loginBtn) {
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("login-email")?.value.trim();
+      const password = document.getElementById("login-password")?.value.trim();
+
+      if (!email || !password) {
+        alert("Please enter email and password");
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        window.location.href = "dashboard.html"; 
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("Login failed: " + error.message);
+      }
+    });
+  }
+});
+
+// --- Logout Logic ---
 export async function logoutUser() {
   await signOut(auth);
-  window.location.href = "index.html"; // back to login
+  alert("Logged out!");
+  window.location.href = "index.html"; 
 }
