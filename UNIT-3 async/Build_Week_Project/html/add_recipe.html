@@ -6,11 +6,14 @@
     <title>RecipeNest - Add Recipe</title>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="/UNIT-3 async/Build_Week_Project/css/recipe-form.css">
-    <link rel="stylesheet" href="/UNIT-3 async/Build_Week_Project/css/recipe-display.css">
+    <link rel="stylesheet" href="/UNIT-3 async/Build_Week_Project/css/main.css">
 </head>
 <body>
     <header class="navbar">
-        <h1>RecipeNest</h1>
+        <div class="logo-title">
+            <img src="/UNIT-3 async/Build_Week_Project/assets/logo.png" alt="RecipeNest Logo" class="logo">
+            <h2>RecipeNest</h2>
+        </div>
         <nav>
             <a href="/UNIT-3 async/Build_Week_Project/html/dashboard.html">My Recipes</a>
             <a href="/UNIT-3 async/Build_Week_Project/html/all_recipes.html">All Recipes</a>
@@ -21,7 +24,6 @@
     </header>
     <main>
         <section class="add-recipe-section">
-            <h2>Add Recipe Section</h2>
             <form id="recipeForm">
                 <h3 id="formTitle">Add a New Recipe</h3>
                 <input type="text" id="title" placeholder="Recipe Title" required>

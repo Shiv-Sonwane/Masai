@@ -11,6 +11,19 @@
     margin-bottom: 1rem;
 }
 
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 6px; 
+}
+
 .add-recipe-section input,
 .add-recipe-section textarea,
 .add-recipe-section select {

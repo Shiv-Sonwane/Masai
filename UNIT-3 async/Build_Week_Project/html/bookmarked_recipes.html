@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecipeNest - Bookmarked Recipes</title>
-    <link rel="stylesheet" href="/UNIT-3 async/Build_Week_Project/css/recipe-display.css">
+    <link rel="stylesheet" href="/UNIT-3 async/Build_Week_Project/css/main.css">
 </head>
 <body>
     <header class="navbar">
-        <h1>RecipeNest</h1>
+        <div class="logo-title">
+            <img src="/UNIT-3 async/Build_Week_Project/assets/logo.png" alt="RecipeNest Logo" class="logo">
+            <h2>RecipeNest</h2>
+        </div>
         <nav>
             <a href="/UNIT-3 async/Build_Week_Project/html/dashboard.html">My Recipes</a>
             <a href="/UNIT-3 async/Build_Week_Project/html/all_recipes.html">All Recipes</a>
@@ -18,9 +21,10 @@
         </nav>
     </header>
     <main>
+        <h2>Bookmarked Recipes</h2>
         <section class="bookmarked-recipes-section">
-            <h2>Bookmarked Recipes</h2>
-            <div id="bookmarked-recipe-list"></div>
+            
+            <div id="all-recipe-list"></div>
         </section>
     </main>
     <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js"></script>
