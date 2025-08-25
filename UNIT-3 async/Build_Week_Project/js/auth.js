@@ -1,67 +1,72 @@
-import { auth, db } from "./config.js";
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut 
+// Import Firebase app and auth modules, and Firebase configuration
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { firebaseConfig } from "/UNIT-3 async/Build_Week_Project/js/config.js";
 
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+// Initialize Firebase with the provided configuration
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-document.addEventListener("DOMContentLoaded", () => {
-  
-  // --- Signup Logic ---
-  const signupBtn = document.getElementById("signupBtn");
-  if (signupBtn) {
-    signupBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("signup-email")?.value.trim();
-      const password = document.getElementById("signup-password")?.value.trim();
+// Get DOM elements for login and signup forms
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
 
-      if (!email || !password) {
-        alert("Please enter email and password");
-        return;
-      }
+// Handle login form submission
+if (loginForm) {
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent default form submission
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-        await setDoc(doc(db, "users", userCredential.user.uid), { email });
-        alert("Account created successfully! Please login.");
-        window.location.href = "/UNIT-3 async/Build_Week_Project/html/index.html"; // redirect to login
-      } catch (error) {
-        console.error("Signup error:", error);
-        alert("Signup failed: " + error.message);
-      }
+        // Sign in user with email and password
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                console.log("Login successful:", userCredential.user.email);
+                // Redirect to dashboard after successful login
+                window.location.href = "/UNIT-3 async/Build_Week_Project/html/dashboard.html";
+            })
+            .catch((error) => {
+                console.error("Login error:", error.message);
+                alert("Login failed: " + error.message);
+            });
     });
-  }
+}
 
-  // --- Login Logic ---
-  const loginBtn = document.getElementById("loginBtn");
-  if (loginBtn) {
-    loginBtn.addEventListener("click", async () => {
-      const email = document.getElementById("login-email")?.value.trim();
-      const password = document.getElementById("login-password")?.value.trim();
+// Handle signup form submission
+if (signupForm) {
+    signupForm.addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent default form submission
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
 
-      if (!email || !password) {
-        alert("Please enter email and password");
-        return;
-      }
+        // Validate password match
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
 
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert("Login successful!");
-        window.location.href = "dashboard.html"; 
-      } catch (error) {
-        console.error("Login error:", error);
-        alert("Login failed: " + error.message);
-      }
+        // Create new user with email and password
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Update user profile with username
+                return updateProfile(userCredential.user, {
+                    displayName: username,
+                }).then(() => {
+                    console.log("Signup successful:", userCredential.user.email);
+                    // Redirect to dashboard after successful signup
+                    window.location.href = "/UNIT-3 async/Build_Week_Project/html/dashboard.html";
+                });
+            })
+            .catch((error) => {
+                console.error("Signup error:", error.message);
+                alert("Signup failed: " + error.message);
+            });
     });
-  }
-});
-
-// --- Logout Logic ---
-export async function logoutUser() {
-  await signOut(auth);
-  alert("Logged out!");
-  window.location.href = "index.html"; 
 }
