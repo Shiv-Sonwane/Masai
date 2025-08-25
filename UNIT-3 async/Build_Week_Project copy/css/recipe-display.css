@@ -1,0 +1,251 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+    background: #2c3e50;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    font-size: 1.5rem;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.navbar a.active,
+.navbar a:hover {
+    background: #34495e;
+}
+
+.navbar button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    background: #c0392b;
+}
+
+/* Container */
+main {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 30px;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.my-recipes-section,
+.add-recipe-section,
+.all-recipes-section,
+.bookmarked-recipes-section {
+    flex: 0 0 50%;
+    min-width: 300px;
+}
+
+.my-recipes-section #recipe-list,
+.all-recipes-section #all-recipe-list,
+.bookmarked-recipes-section #bookmarked-recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+/* Recipe card */
+.recipe-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-4px);
+}
+
+.recipe-card h3 {
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+.recipe-card p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.recipe-card .instructions {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.recipe-card small {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.recipe-card button {
+    margin-top: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.recipe-card button:hover {
+    background: #0056b3;
+}
+
+.recipe-card .delete-btn {
+    background: #ff4444;
+}
+
+.recipe-card .delete-btn:hover {
+    background: #cc0000;
+}
+
+/* Bookmark icon styles */
+.bookmark-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>') no-repeat center;
+    cursor: pointer;
+}
+
+.bookmark-icon.bookmarked {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>') no-repeat center;
+}
+
+.bookmark-icon:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: -30px;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.comments {
+    margin-top: 15px;
+}
+
+.comment-list {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.comment-list li {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    background: #f9f9f9;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.comment-form {
+    display: flex;
+    margin-top: 0.5rem;
+}
+
+.comment-form input {
+    width: calc(100% - 80px);
+    display: inline-block;
+}
+
+.comment-form button {
+    width: 70px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 20px;
+    }
+    .dashboard-container {
+        flex-direction: column;
+    }
+    .my-recipes-section,
+    .add-recipe-section,
+    .all-recipes-section,
+    .bookmarked-recipes-section {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .my-recipes-section #recipe-list,
+    .all-recipes-section #all-recipe-list,
+    .bookmarked-recipes-section #bookmarked-recipe-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 15px;
+    }
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .navbar h1 {
+        margin-bottom: 10px;
+    }
+    .comment-form input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .comment-form button {
+        width: 100%;
+        margin-left: 0;
+    }
+}
