@@ -16,7 +16,7 @@ Frontend (Firebase-powered)
 
 Frontend: https://app.netlify.com/projects/recipes-nest74/configuration/general
 Backend: Firebase Authentication + Firestore Database (serverless)  
-Database: Firebase Firestore
+Database: Firebase Fistore
 
 ## Directory Structure
 
