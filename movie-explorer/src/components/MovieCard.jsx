@@ -5,7 +5,7 @@ function MovieCard({movie}){
     const navigate = useNavigate()
 
     return (
-        <div className='movie-card' onClick={()=>navigate('/movi/&{movie.id}')}
+        <div className='movie-card' onClick={()=>navigate(`/movie/${movie.id}`)}
           style={{
             cusrsor:'pointer',
             border: '1px solid',
