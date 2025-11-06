@@ -1,0 +1,1 @@
+export const logo="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1b/10/82/1b1082e2-a332-416e-4767-865c7b33281a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.png"
