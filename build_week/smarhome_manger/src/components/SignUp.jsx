@@ -37,7 +37,8 @@ function Signup() {
 
   },[user,navigate])
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
       <div className="flex justify-center mb-4">
         <img className="w-24 h-auto" src={logo} alt="swiggy logo" />
       </div>
@@ -82,6 +83,7 @@ function Signup() {
         </Link>
       </p>
 
+     </div>
     </div>
   );
 }
