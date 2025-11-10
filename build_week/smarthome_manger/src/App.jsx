@@ -12,7 +12,9 @@ function App() {
 
   return (
     <>
+    {/* Global navbar (hidden on /login & /signup by Navbar component logic) */}
     <Navbar />
+     {/* Routes wrapper. Note: keep outer container minimal so pages control their own layout */}
     <div className="min-h-screen bg-gray-100">
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />

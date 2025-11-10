@@ -1,4 +1,4 @@
-// src/components/AddRoomForm.jsx
+
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addRoom } from "../features/rooms/roomsSlice";

@@ -1,13 +1,8 @@
-// src/components/DeviceCard.jsx
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
-  connectDevice,
-  togglePower,
-  setBrightness,
-  setSpeed,
-  setTemp,
-  removeDevice,
+  updateDevice,
+  deleteDevice,
 } from "../features/devices/devicesSlice";
 import { Power, Plug, Trash2 } from "lucide-react";
 
@@ -15,28 +10,48 @@ export default function DeviceCard({ device }) {
   const dispatch = useDispatch();
 
   const handleConnect = () => {
-    dispatch(connectDevice(device.id));
+    dispatch(updateDevice({ id: device.id, updates: { connected: true } }));
   };
 
   const handleTogglePower = () => {
-    dispatch(togglePower(device.id));
+    dispatch(
+      updateDevice({
+        id: device.id,
+        updates: { state: { ...device.state, power: !device.state.power } },
+      })
+    );
   };
 
   const changeBrightness = (e) => {
-    dispatch(setBrightness({ id: device.id, brightness: Number(e.target.value) }));
+    dispatch(
+      updateDevice({
+        id: device.id,
+        updates: { state: { ...device.state, brightness: Number(e.target.value) } },
+      })
+    );
   };
 
   const changeSpeed = (e) => {
-    dispatch(setSpeed({ id: device.id, speed: e.target.value }));
+    dispatch(
+      updateDevice({
+        id: device.id,
+        updates: { state: { ...device.state, speed: e.target.value } },
+      })
+    );
   };
 
   const changeTemp = (e) => {
-    dispatch(setTemp({ id: device.id, temp: Number(e.target.value) }));
+    dispatch(
+      updateDevice({
+        id: device.id,
+        updates: { state: { ...device.state, temp: Number(e.target.value) } },
+      })
+    );
   };
 
   const handleRemove = () => {
     if (confirm(`Remove device "${device.name}"?`)) {
-      dispatch(removeDevice(device.id));
+      dispatch(deleteDevice(device.id));
     }
   };
 
@@ -78,18 +93,18 @@ export default function DeviceCard({ device }) {
         <div className="flex items-center justify-between">
           <div>
             <span className="text-gray-500">Power:</span>{" "}
-            <span className="font-medium">{device.state.power ? "On" : "Off"}</span>
+            <span className="font-medium">{device.state?.power ? "On" : "Off"}</span>
           </div>
 
           <button
             onClick={handleTogglePower}
             disabled={disabled}
             className={`flex items-center gap-2 px-3 py-1 rounded text-white text-sm ${
-              device.state.power ? "bg-red-500 hover:bg-red-600" : "bg-blue-600 hover:bg-blue-700"
+              device.state?.power ? "bg-red-500 hover:bg-red-600" : "bg-blue-600 hover:bg-blue-700"
             } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             <Power size={14} />
-            {device.state.power ? "Turn Off" : "Turn On"}
+            {device.state?.power ? "Turn Off" : "Turn On"}
           </button>
         </div>
 
@@ -101,12 +116,12 @@ export default function DeviceCard({ device }) {
               type="range"
               min="0"
               max="100"
-              value={device.state.brightness}
+              value={device.state?.brightness ?? 75}
               onChange={changeBrightness}
               disabled={disabled}
               className={`w-full ${disabled ? "opacity-50" : ""}`}
             />
-            <div className="text-xs text-gray-600"> {device.state.brightness}%</div>
+            <div className="text-xs text-gray-600"> {device.state?.brightness ?? 0}%</div>
           </div>
         )}
 
@@ -115,7 +130,7 @@ export default function DeviceCard({ device }) {
           <div className="space-y-1">
             <label className="text-xs text-gray-500">Speed</label>
             <select
-              value={device.state.speed}
+              value={device.state?.speed ?? "Low"}
               onChange={changeSpeed}
               disabled={disabled}
               className="p-1 border rounded"
@@ -124,7 +139,7 @@ export default function DeviceCard({ device }) {
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
-            <div className="text-xs text-gray-600">Current: {device.state.speed}</div>
+            <div className="text-xs text-gray-600">Current: {device.state?.speed}</div>
           </div>
         )}
 
@@ -137,7 +152,7 @@ export default function DeviceCard({ device }) {
                 type="number"
                 min="16"
                 max="30"
-                value={device.state.temp}
+                value={device.state?.temp ?? 24}
                 onChange={changeTemp}
                 disabled={disabled}
                 className="w-20 p-1 border rounded"

@@ -16,7 +16,11 @@ export const signupUser = createAsyncThunk(
         password
       );
 
-      return userCredentials.user;
+      return {
+        uid: userCredentials.user.uid,
+        email: userCredentials.user.email || null,
+      };
+
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -34,7 +38,11 @@ export const loginUser = createAsyncThunk(
         password
       );
 
-      return userCredentials.user;
+      return {
+        uid: userCredentials.user.uid,
+        email: userCredentials.user.email || null,
+      };
+
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -60,6 +68,7 @@ extraReducers: (builder) => {
    // signup
    .addCase(signupUser.pending, (state) => { 
      state.loading = true;
+     state.error = null;
    })
    
    .addCase(signupUser.fulfilled, (state, action) => {
@@ -74,6 +83,7 @@ extraReducers: (builder) => {
     // Login 
     .addCase(loginUser.pending, (state) => { 
      state.loading = true;
+     state.error = null;
     }) 
 
     .addCase(loginUser.fulfilled, (state, action) => {

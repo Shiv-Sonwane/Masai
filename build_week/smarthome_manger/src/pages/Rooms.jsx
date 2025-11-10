@@ -1,14 +1,14 @@
-// src/pages/Rooms.jsx
+
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addRoom as addRoomAction, selectRoom, deleteRoom } from "../features/rooms/roomsSlice";
+import { addRoom, selectRoom, deleteRoom, updateRoom } from "../features/rooms/roomsSlice";
 import { Home, Edit3, Trash2 } from "lucide-react";
 
 export default function Rooms() {
   const dispatch = useDispatch();
   const rooms = useSelector((s) => s.rooms.list);
   const selectedRoomId = useSelector((s) => s.rooms.selectedRoomId);
-  const user = useSelector((s) => s.auth.user); // if you want to connect to firestore later
+  const user = useSelector((s) => s.auth.user);
 
   const [name, setName] = useState("");
   const [editingId, setEditingId] = useState(null);
@@ -16,9 +16,8 @@ export default function Rooms() {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    // re-use your existing local addRoom action which expects name string
-    dispatch(addRoomAction(name));
+    if (!name.trim() || !user?.uid) return;
+    dispatch(addRoom({ uid: user.uid, name }));
     setName("");
   };
 
@@ -28,15 +27,8 @@ export default function Rooms() {
   };
 
   const finishEdit = () => {
-    if (!editingName.trim()) return;
-    // simple local update via updateDeviceMeta or direct reducer - we'll reuse addRoom pattern by removing old and adding new
-    // but simplest is to dispatch delete then add — or extend rooms slice; for now do quick approach:
-    // dispatch(deleteRoom(editingId));
-    // dispatch(addRoom(editingName));
-    // We'll do a small inline dispatch for update if slice supports it — if not, use delete+add fallback
-    // For safety, use delete+add fallback:
-    dispatch(deleteRoom(editingId));
-    dispatch(addRoomAction(editingName));
+    if (!editingName.trim() || !editingId) return;
+    dispatch(updateRoom({ id: editingId, updates: { name: editingName } }));
     setEditingId(null);
     setEditingName("");
   };
